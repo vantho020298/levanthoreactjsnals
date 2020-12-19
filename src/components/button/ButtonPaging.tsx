@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
-class ButtonPaging extends React.Component {
+interface IRecipeProps {
+    isCurrentPage:boolean;
+    id: string;
+    handleClick: (event: MouseEvent)=> void;
+    text: string;
+}
+
+class ButtonPaging extends React.Component<IRecipeProps> {
     render() {
         const { isCurrentPage, id, handleClick, text } = this.props;
         const className = isCurrentPage ? 'btn btn-primary' : 'btn btn-outline-secondary';

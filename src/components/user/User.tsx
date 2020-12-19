@@ -1,6 +1,11 @@
 import React from 'react';
+import UserType from '../../types/user';
 
-class User extends React.Component {
+
+interface IRecipeProps {
+    user: UserType;
+}
+class User extends React.Component<IRecipeProps> {
     render() {
         const { id, avatar, name, phone, email } = this.props.user
 

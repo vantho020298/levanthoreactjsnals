@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FormLogin from './FormLogin';
 import { removeItem } from '../../localStorage/localStorage';
+import StoreStageType from '../../types/storeStage';
 
-const mapStateToProps = state => {
-    return {
-        removeItem
-    };
-};
-class Login extends React.Component {
+interface IRecipeProps {
+    removeItem: (token: string) => void;
+}
+
+class Login extends React.Component<IRecipeProps> {
     render() {
         this.props.removeItem('token')
         return (
@@ -31,5 +31,11 @@ class Login extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state: StoreStageType) => {
+    return {
+        removeItem
+    };
+};
 
 export default connect(mapStateToProps)(Login);

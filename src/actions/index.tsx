@@ -1,11 +1,14 @@
-import {GET_LIST_USER} from './types.js';
+import {GET_LIST_USER} from './types';
 import axios from 'axios';
 import { setItem, getItem } from '../localStorage/localStorage';
+import GetUsersType from '../types/getUsers';
+import Account from '../types/account';
 const loginUrl = 'https://cyb06ylby6.execute-api.ap-southeast-1.amazonaws.com/v1/login';
 const getUsersUrl = 'https://cyb06ylby6.execute-api.ap-southeast-1.amazonaws.com/v1/users';
-export const login = (username, password) => {
-    return (dispatch) => {
-        axios.post(`${loginUrl}`, {username, password})
+
+export const login = (account: Account) => {
+    return (dispatch: any) => {
+        axios.post(`${loginUrl}`, account)
             .then(response => {
                 return response.data
             })
@@ -16,11 +19,11 @@ export const login = (username, password) => {
             .catch(error => {
                 throw (error);
             });
-    };
+        }
 };
 
 export const getUsers = () => {
-    return (dispatch) => {
+    return (dispatch: (action: GetUsersType) => void) => {
         axios.get(`${getUsersUrl}`, {
             headers: {
               'Authorization': `Basic ${getItem('token')}` 

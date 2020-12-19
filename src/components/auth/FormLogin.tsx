@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
+import Account from '../../types/account';
 
-const mapDispatchToProps = dispatch => {
-    return {
-        login: (account, password) => dispatch(login(account, password))
-    };
-};
+interface IRecipeProps {
+    login: (account: Account ) => void;
+}
+  
+interface IRecipeState {
+    username?: string;
+    password?: string;
+}
 
-class FormLogin extends React.Component {
-    constructor(props) {
+class FormLogin extends React.Component<IRecipeProps, IRecipeState> {
+    constructor(props: any) {
       super(props);
       this.state = {
         username: '',
@@ -20,8 +24,8 @@ class FormLogin extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   
-    handleInputChange(event) {
-      const target = event.target;
+    handleInputChange(event: ChangeEvent) {
+      const target = event.target as HTMLInputElement;
       const value = target.value;
       const name = target.name;
   
@@ -31,7 +35,9 @@ class FormLogin extends React.Component {
     }
 
     handleSubmit() {
-        this.props.login(this.state.username, this.state.password)
+        let username = this.state.username === undefined ? '': this.state.username;
+        let password = this.state.password === undefined ? '': this.state.password;
+        this.props.login({username, password})
     }
     render() {
         return (
@@ -64,10 +70,15 @@ class FormLogin extends React.Component {
                 <div className="text-center mt-4 font-weight-light">
                     Don't have an account? <a href="register.html" className="text-primary">Create</a>
                 </div>
-            </form>
-                            
+            </form> 
         )
     }
 }
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        login: ({username, password}: Account): void=> dispatch(login({username, password}))
+    };
+};
 
 export default connect(null, mapDispatchToProps)(FormLogin);

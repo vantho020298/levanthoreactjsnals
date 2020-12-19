@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { connect } from 'react-redux';
 import { isLogin } from '../../common/common';
 import User from './User';
+import UserType from './../../types/user';
+import StoreStageType from '../../types/storeStage';
 import Footer from '../common/Footer';
 import ButtonGroup from '../button/ButtonGroup';
 import { getUsers } from '../../actions';
+  
+interface IRecipeProps {
+    listUsers: UserType[];
+    isLogin: boolean;
+    getUsers: () => User[];
+}
+  
+interface IRecipeState {
+    currentPage: number;
+    recordsPerPage: number;
+}
 
-const mapStateToProps = state => {
-    return {
-        isLogin: isLogin(),
-        listUsers: state.listUsers
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getUsers: () => dispatch(getUsers())
-    };
-};
-
-class ListUsers extends React.Component {
-    constructor(props) {
+class ListUsers extends React.Component<IRecipeProps, IRecipeState> {
+    constructor(props: any) {
         super(props);
         this.state = {
           currentPage: 1,
@@ -30,9 +30,10 @@ class ListUsers extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     
-    handleClick(event) {
+    handleClick(event: MouseEvent) {
+        const target = event.target as HTMLElement;
         this.setState({
-            currentPage: Number(event.target.id)
+            currentPage: Number(target.id)
         })
     }
 
@@ -104,5 +105,18 @@ class ListUsers extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state: StoreStageType) => {
+    return {
+        isLogin: isLogin(),
+        listUsers: state.listUsers
+    };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getUsers: () => dispatch(getUsers())
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);
