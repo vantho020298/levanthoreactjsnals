@@ -8,7 +8,6 @@ const mapStateToProps = state => {
         removeItem
     };
 };
-
 class Login extends React.Component {
     render() {
         this.props.removeItem('token')

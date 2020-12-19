@@ -1,5 +1,5 @@
 {
-  "name": "RoyalUI_admin",
+  "name": "royal_ui_admin",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
@@ -27,8 +27,10 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
+    "@types/react": "^17.0.0",
     "browser-sync": "^2.16.0",
     "compass-mixins": "^0.12.10",
+    "express": "^4.17.1",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-inject": "^5.0.2",
@@ -38,7 +40,6 @@
     "merge-stream": "^1.0.1",
     "minimatch": "^3.0.4",
     "node-sass": "^4.12.0",
-    "express": "^4.17.1",
     "sass": "^1.30.0"
   },
   "scripts": {
