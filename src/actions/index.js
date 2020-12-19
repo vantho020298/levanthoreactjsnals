@@ -1,40 +1,17 @@
-import {
-    ADD_MORE_PRODUCT,
-    ADD_TO_CART,
-    REMOVE_PRODUCT
-} from './types.js';
+import {GET_LIST_USER} from './types.js';
 import axios from 'axios';
-const apiUrl = 'https://tiki.vn/api/v2/widget/deals/mix?page=';
-const loginUrl = 'http://localhost:3001/login';
-let page = 1;
-
-export const addToCart = (data) => {
-    return {
-        type: ADD_TO_CART,
-        payload: data
-    }
-};
-
-export const removeProduct = deal_id => {
-    return {
-        type: REMOVE_PRODUCT,
-        payload: {
-            deal_id
-        }
-    }
-}
-
-export const moreProduct = () => {
+import { setItem, getItem } from '../localStorage/localStorage';
+const loginUrl = 'https://cyb06ylby6.execute-api.ap-southeast-1.amazonaws.com/v1/login';
+const getUsersUrl = 'https://cyb06ylby6.execute-api.ap-southeast-1.amazonaws.com/v1/users';
+export const login = (username, password) => {
     return (dispatch) => {
-        axios.get(`${apiUrl + page++}`)
+        axios.post(`${loginUrl}`, {username, password})
             .then(response => {
                 return response.data
             })
             .then(data => {
-                dispatch({
-                    type: ADD_MORE_PRODUCT,
-                    payload: data.data
-                })
+                setItem('token', data.token)
+                window.location.href = '/listusers';
             })
             .catch(error => {
                 throw (error);
@@ -42,17 +19,19 @@ export const moreProduct = () => {
     };
 };
 
-export const login = (account, password) => {
+export const getUsers = () => {
     return (dispatch) => {
-        axios.post(`${loginUrl}`, {account, password})
+        axios.get(`${getUsersUrl}`, {
+            headers: {
+              'Authorization': `Basic ${getItem('token')}` 
+            }})
             .then(response => {
                 return response.data
             })
             .then(data => {
-                debugger
                 dispatch({
-                    type: ADD_MORE_PRODUCT,
-                    payload: data.data
+                    type: GET_LIST_USER,
+                    data: data
                 })
             })
             .catch(error => {

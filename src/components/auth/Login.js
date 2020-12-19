@@ -1,19 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FormLogin from './FormLogin';
+import { removeItem } from '../../localStorage/localStorage';
 
 const mapStateToProps = state => {
     return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
+        removeItem
     };
 };
 
 class Login extends React.Component {
     render() {
+        this.props.removeItem('token')
         return (
             <div className="container-fluid page-body-wrapper full-page-wrapper">
                 <div className="content-wrapper d-flex align-items-center auth px-0">
@@ -35,4 +33,4 @@ class Login extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);

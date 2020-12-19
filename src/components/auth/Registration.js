@@ -1,16 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
 class Registration extends React.Component {
     render() {
         return (
@@ -68,4 +56,4 @@ class Registration extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default Registration;

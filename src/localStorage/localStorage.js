@@ -1,15 +1,16 @@
-export const saveState = (state, itemName) => {
-    if (state.cart.length !== 0) {
-        localStorage.setItem(itemName, JSON.stringify(state));
-    }
+export const setItem = (itemName, data) => {
+    localStorage.setItem(itemName, data);
 };
 
-export const getState = (itemName) => {
+export const getItem = (itemName) => {
     try {
-        const s = localStorage.getItem(itemName);
-        if (s === null) return undefined;
-        return JSON.parse(s);
+        const data = localStorage.getItem(itemName);
+        return data === null ? undefined : data;
     } catch (e) {
         return undefined;
     }
+};
+
+export const removeItem = (itemName) => {
+    localStorage.removeItem(itemName);
 };

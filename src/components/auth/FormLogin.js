@@ -1,11 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from './../actions';
-
-const mapStateToProps = state => {
-    return {
-    };
-};
+import { login } from '../../actions';
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -35,9 +30,8 @@ class FormLogin extends React.Component {
       });
     }
 
-    handleSubmit(event) {
-        debugger
-        this.props.login(this.state.account, this.state.password)
+    handleSubmit() {
+        this.props.login(this.state.username, this.state.password)
     }
     render() {
         return (
@@ -76,4 +70,4 @@ class FormLogin extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
+export default connect(null, mapDispatchToProps)(FormLogin);
