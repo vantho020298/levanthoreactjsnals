@@ -15,10 +15,10 @@ class App extends React.Component {
               <Route exact path="/">
                 <Login />
               </Route>
-              <Route path="/registration">
+              <Route exact path="/registration">
                 <Registration />
               </Route>
-              <Route path="/listusers">
+              <Route exact path="/listusers">
                 <NavBar />
                 <div className="container-fluid page-body-wrapper">
                   <SideBar />

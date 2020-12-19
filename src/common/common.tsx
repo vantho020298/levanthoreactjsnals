@@ -1,5 +1,5 @@
 import { getItem } from '../localStorage/localStorage';
 
-export const isLogin = (): boolean => {
+export const haveLogging = (): boolean => {
     return getItem('token') !== '';
 }

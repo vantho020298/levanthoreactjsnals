@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 import { connect } from 'react-redux';
-import { isLogin } from '../../common/common';
+import { haveLogging } from '../../common/common';
 import User from './User';
 import UserType from './../../types/user';
 import StoreStageType from '../../types/storeStage';
@@ -10,7 +10,7 @@ import { getUsers } from '../../actions';
   
 interface IRecipeProps {
     listUsers: UserType[];
-    isLogin: boolean;
+    haveLogging: boolean;
     getUsers: () => User[];
 }
   
@@ -38,8 +38,8 @@ class ListUsers extends React.Component<IRecipeProps, IRecipeState> {
     }
 
     render() {
-        const { listUsers, isLogin, getUsers } = this.props;
-        if (!isLogin) {
+        const { listUsers, haveLogging, getUsers } = this.props;
+        if (!haveLogging) {
             window.location.href = '/';
         }
 
@@ -108,7 +108,7 @@ class ListUsers extends React.Component<IRecipeProps, IRecipeState> {
 
 const mapStateToProps = (state: StoreStageType) => {
     return {
-        isLogin: isLogin(),
+        haveLogging: haveLogging(),
         listUsers: state.listUsers
     };
 };
